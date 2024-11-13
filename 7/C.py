@@ -13,7 +13,6 @@ i = 0
 while not done:
     if len(track_str)>0 and G[r][c]=='S':
         break
-    print(r,c,d,i,G[r][c])
     if done:
         break
     for new_d in [d, (d+3)%4, (d+1)%4]:
@@ -27,7 +26,7 @@ while not done:
             break
             if G[r][c]=='S':
                 done = True
-print(track_str)
+#print(track_str)
 
 actions_by_id = {}
 data = open('C.in').read().strip()
@@ -65,25 +64,11 @@ def score(actions, track, rounds):
     i = 0
     for round_ in range(rounds):
         round_actions = actions[i:] + actions[:i]
+        #print(f'{i=} {round_actions=} {actions=}')
         round_score, round_power = score_one(round_actions, track)
         score += round_score + power * len(track)
         power += round_power
-        i += len(track)
-
-        #score += len(track)*power 
-
-        #for c in track_str:
-        #    if c=='=' or c=='S':
-        #        c = actions[i%len(actions)]
-#
-#            if c=='+':
-#                power += 1
-#            elif c=='-':
-#                power -= 1
-#            else:
-#                assert c=='=' or c=='S', c
-#            score += power
-#            i += 1
+        i = (i+len(track))%len(actions)
     return score
 
 ROUNDS = 2024
