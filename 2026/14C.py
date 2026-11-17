@@ -59,4 +59,5 @@ for free1 in V:
         if ans < best:
             print(f'{free1=} {free2=} {ans=}')
             best = ans
+print(len(V))
 print(best)
